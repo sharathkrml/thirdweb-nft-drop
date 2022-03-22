@@ -1,6 +1,25 @@
 import React from "react";
 import styles from "./Button.module.css";
-function Button({ toggleModal }) {
+function Button({ toggleModal, address }) {
+  const renderButton = () => {
+    if (!address) {
+      return (
+        <button
+          onClick={toggleModal}
+          className={`${styles.mainButton} ${styles.claimButton}`}
+        >
+          Connect Wallet
+        </button>
+      );
+    }
+    return (
+      <button
+        className={`${styles.mainButton} ${styles.claimButton}`}
+      >
+        Mint
+      </button>
+    );
+  };
   return (
     <>
       <div className={styles.btnWrapper}>
@@ -17,12 +36,7 @@ function Button({ toggleModal }) {
             ></path>
           </svg>
         </a>
-        <button
-          onClick={toggleModal}
-          className={`${styles.mainButton} ${styles.claimButton}`}
-        >
-          Claim
-        </button>
+        {renderButton()}
       </div>
       <div className={styles.amountClaimed}>3/4 claimed</div>
     </>

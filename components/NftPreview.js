@@ -1,18 +1,34 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Button from "./Button";
 import styles from "./NftPreview.module.css";
 import Modal from "react-modal";
 import Image from "next/image";
+import { useAddress, useMetamask } from "@thirdweb-dev/react";
+
 Modal.setAppElement("#root");
 function NftPreview({ contractAddress }) {
+  // detemine state of modal
   const [isOpen, setIsOpen] = useState(false);
+  const connectWithMetamask = useMetamask();
+  const address = useAddress();
 
   function toggleModal() {
+    // for manually control modal,for button Component
     setIsOpen(!isOpen);
   }
+  useEffect(() => {
+    if (address) {
+      setIsOpen(false);
+    }
+  }, [address]);
+
   return (
     <div className={styles.main} id="root">
-      <div className={styles.addressComponent}>0x7fdc80....</div>
+      {address && (
+        <div className={styles.addressComponent}>
+          {address.substring(0, 9)}....
+        </div>
+      )}
       <div className={styles.imageWrapper}>
         <img
           className={styles.image}
@@ -24,8 +40,7 @@ function NftPreview({ contractAddress }) {
       <p className={styles.desc}>
         Our Equilibrium collection promotes balance and calm
       </p>
-      <Button toggleModal={toggleModal} />
-      {/* <ConnectModal /> */}
+      <Button toggleModal={toggleModal} address={address} />
       <Modal
         isOpen={isOpen}
         onRequestClose={toggleModal}
@@ -56,7 +71,10 @@ function NftPreview({ contractAddress }) {
         }}
       >
         <div className={styles.ConnectModal}>
-          <div className={`${styles.walletWrapper} ${styles.metamask}`}>
+          <div
+            className={`${styles.walletWrapper} ${styles.metamask}`}
+            onClick={connectWithMetamask}
+          >
             <Image
               src="/metamask.svg"
               className={styles.walletImage}

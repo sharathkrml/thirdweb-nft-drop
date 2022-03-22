@@ -68,6 +68,7 @@
 .walletDesc {
   font-size: 0.7rem;
 }
+
 @media only screen and (max-width: 360px) {
   .name {
     font-size: 1.7rem;
