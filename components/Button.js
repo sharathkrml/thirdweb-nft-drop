@@ -1,6 +1,11 @@
 import React from "react";
 import styles from "./Button.module.css";
-function Button({ toggleModal, address }) {
+function Button({
+  toggleModal,
+  address,
+  totalClaimedSupply,
+  totalUnclaimedSupply,
+}) {
   const renderButton = () => {
     if (!address) {
       return (
@@ -13,9 +18,7 @@ function Button({ toggleModal, address }) {
       );
     }
     return (
-      <button
-        className={`${styles.mainButton} ${styles.claimButton}`}
-      >
+      <button className={`${styles.mainButton} ${styles.claimButton}`}>
         Mint
       </button>
     );
@@ -38,7 +41,12 @@ function Button({ toggleModal, address }) {
         </a>
         {renderButton()}
       </div>
-      <div className={styles.amountClaimed}>3/4 claimed</div>
+      {totalClaimedSupply && (
+        <div className={styles.amountClaimed}>
+          {totalClaimedSupply}/{totalUnclaimedSupply + totalClaimedSupply}{" "}
+          claimed
+        </div>
+      )}
     </>
   );
 }

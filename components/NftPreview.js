@@ -3,24 +3,42 @@ import Button from "./Button";
 import styles from "./NftPreview.module.css";
 import Modal from "react-modal";
 import Image from "next/image";
-import { useAddress, useMetamask } from "@thirdweb-dev/react";
+import { useAddress, useMetamask, useNFTDrop } from "@thirdweb-dev/react";
 
 Modal.setAppElement("#root");
 function NftPreview({ contractAddress }) {
   // detemine state of modal
   const [isOpen, setIsOpen] = useState(false);
+  const [totalClaimedSupply, setTotalClaimedSupply] = useState();
+  const [totalUnclaimedSupply, setTotalUnClaimedSupply] = useState();
   const connectWithMetamask = useMetamask();
   const address = useAddress();
+  const nftDropContract = useNFTDrop(contractAddress);
 
   function toggleModal() {
     // for manually control modal,for button Component
     setIsOpen(!isOpen);
   }
+  const getTotalSupply = async () => {
+    try {
+      const unclaimed = await nftDropContract.totalUnclaimedSupply();
+      console.log("unclaimed ", unclaimed.toNumber());
+      setTotalUnClaimedSupply(unclaimed.toNumber());
+      const claimed = await nftDropContract.totalClaimedSupply();
+      console.log("claimed ", claimed.toNumber());
+      setTotalClaimedSupply(claimed.toNumber());
+    } catch (error) {
+      console.log(error);
+    }
+  };
   useEffect(() => {
     if (address) {
       setIsOpen(false);
     }
   }, [address]);
+  useEffect(() => {
+    getTotalSupply();
+  }, [nftDropContract]);
 
   return (
     <div className={styles.main} id="root">
@@ -40,7 +58,12 @@ function NftPreview({ contractAddress }) {
       <p className={styles.desc}>
         Our Equilibrium collection promotes balance and calm
       </p>
-      <Button toggleModal={toggleModal} address={address} />
+      <Button
+        toggleModal={toggleModal}
+        address={address}
+        totalClaimedSupply={totalClaimedSupply}
+        totalUnclaimedSupply={totalUnclaimedSupply}
+      />
       <Modal
         isOpen={isOpen}
         onRequestClose={toggleModal}
