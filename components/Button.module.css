@@ -1,0 +1,29 @@
+.btnWrapper {
+  display: flex;
+  width: 90%;
+}
+.mainButton {
+  width: 100%;
+  background-color: rgb(48, 128, 124);
+  border: 0;
+  cursor: pointer;
+  border-radius: 5px;
+  color: white;
+}
+.externalLink {
+  padding: 5px;
+  background-color: rgb(48, 128, 124);
+  margin-right: 10px;
+  border-radius: 5px;
+  color: white;
+  text-decoration: none;
+}
+.amountClaimed {
+  color: #8bacda;
+}
+
+@media only screen and (max-width: 360px) {
+  .btnWrapper {
+    width: 75%;
+  }
+}

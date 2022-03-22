@@ -1,4 +1,5 @@
 import React from "react";
+import Button from "./Button";
 import styles from "./NftPreview.module.css";
 function NftPreview({ contractAddress }) {
   return (
@@ -14,6 +15,7 @@ function NftPreview({ contractAddress }) {
       <p className={styles.desc}>
         Our Equilibrium collection promotes balance and calm
       </p>
+      <Button />
     </div>
   );
 }
