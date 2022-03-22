@@ -13,10 +13,12 @@
 .name {
   color: white;
   max-width: 70%;
+  text-align: center;
 }
 .desc {
   color: #8bacda;
   max-width: 60%;
+  text-align: center;
 }
 .imageWrapper {
   border-radius: 20px;
