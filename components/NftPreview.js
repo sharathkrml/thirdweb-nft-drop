@@ -4,6 +4,9 @@ import styles from "./NftPreview.module.css";
 function NftPreview({ contractAddress }) {
   return (
     <div className={styles.main}>
+      <div className={styles.addressComponent}>
+        0x7fdc80....
+      </div>
       <div className={styles.imageWrapper}>
         <img
           className={styles.image}

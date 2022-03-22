@@ -31,7 +31,16 @@
   height: 100%;
   border-radius: inherit;
 }
-
+.addressComponent {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: block;
+  border: 1px solid white;
+  padding: 10px;
+  border-radius: 10px;
+  color: white;
+}
 @media only screen and (max-width: 360px) {
   .name {
     font-size: 1.7rem;
