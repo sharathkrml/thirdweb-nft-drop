@@ -5,6 +5,7 @@ function Button({
   address,
   totalClaimedSupply,
   totalUnclaimedSupply,
+  claimNft,
 }) {
   const renderButton = () => {
     if (!address) {
@@ -18,7 +19,10 @@ function Button({
       );
     }
     return (
-      <button className={`${styles.mainButton} ${styles.claimButton}`}>
+      <button
+        onClick={claimNft}
+        className={`${styles.mainButton} ${styles.claimButton}`}
+      >
         Mint
       </button>
     );

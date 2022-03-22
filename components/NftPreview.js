@@ -33,6 +33,16 @@ function NftPreview({ contractAddress }) {
       console.log(error);
     }
   };
+  const claimNft = async () => {
+    try {
+      console.log("minting.......");
+      const res = await nftDropContract.claimTo(address, 1);
+      console.log("loading.....");
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   useEffect(() => {
     if (address) {
       setIsOpen(false);
@@ -71,6 +81,7 @@ function NftPreview({ contractAddress }) {
         address={address}
         totalClaimedSupply={totalClaimedSupply}
         totalUnclaimedSupply={totalUnclaimedSupply}
+        claimNft={claimNft}
       />
       <Modal
         isOpen={isOpen}
