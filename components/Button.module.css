@@ -22,7 +22,10 @@
 .amountClaimed {
   color: #8bacda;
 }
-
+.nothingLeft{
+  background-color: rgb(105, 124, 123);
+  cursor: not-allowed;
+}
 @media only screen and (max-width: 360px) {
   .btnWrapper {
     width: 75%;

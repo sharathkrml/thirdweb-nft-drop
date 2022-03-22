@@ -6,6 +6,8 @@ function Button({
   totalClaimedSupply,
   totalUnclaimedSupply,
   claimNft,
+  btnLoading,
+  allClaimed,
 }) {
   const renderButton = () => {
     if (!address) {
@@ -15,6 +17,23 @@ function Button({
           className={`${styles.mainButton} ${styles.claimButton}`}
         >
           Connect Wallet
+        </button>
+      );
+    }
+    if (allClaimed) {
+      return (
+        <button className={`${styles.mainButton} ${styles.nothingLeft}`}>
+          Nothing left
+        </button>
+      );
+    }
+    if (btnLoading) {
+      return (
+        <button
+          onClick={claimNft}
+          className={`${styles.mainButton} ${styles.nothingLeft}`}
+        >
+          loading........
         </button>
       );
     }

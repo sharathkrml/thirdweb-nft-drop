@@ -49,8 +49,10 @@
   justify-content: space-around;
   background-color: white;
   border-radius: 10px;
-  border: 1px solid red;
   height: 100%;
+}
+.mainLoading{
+  color: white;
 }
 .walletWrapper {
   border: 1px solid #2f415b;
