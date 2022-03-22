@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./Button.module.css";
-function Button() {
+function Button({ toggleModal }) {
   return (
     <>
       <div className={styles.btnWrapper}>
@@ -17,7 +17,10 @@ function Button() {
             ></path>
           </svg>
         </a>
-        <button className={`${styles.mainButton} ${styles.claimButton}`}>
+        <button
+          onClick={toggleModal}
+          className={`${styles.mainButton} ${styles.claimButton}`}
+        >
           Claim
         </button>
       </div>
