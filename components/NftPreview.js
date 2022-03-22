@@ -11,6 +11,8 @@ function NftPreview({ contractAddress }) {
   const [isOpen, setIsOpen] = useState(false);
   const [totalClaimedSupply, setTotalClaimedSupply] = useState();
   const [totalUnclaimedSupply, setTotalUnClaimedSupply] = useState();
+  // display image and data
+  const [displayData, setDisplayData] = useState();
   const connectWithMetamask = useMetamask();
   const address = useAddress();
   const nftDropContract = useNFTDrop(contractAddress);
@@ -39,7 +41,17 @@ function NftPreview({ contractAddress }) {
   useEffect(() => {
     getTotalSupply();
   }, [nftDropContract]);
-
+  useEffect(async () => {
+    if (totalUnclaimedSupply !== 0) {
+      try {
+        const res = await nftDropContract.getAllUnclaimed();
+        console.log(res[0]);
+        setDisplayData(res[0]);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  }, [totalUnclaimedSupply]);
   return (
     <div className={styles.main} id="root">
       {address && (
@@ -48,16 +60,12 @@ function NftPreview({ contractAddress }) {
         </div>
       )}
       <div className={styles.imageWrapper}>
-        <img
-          className={styles.image}
-          src="https://gateway.ipfscdn.io/ipfs/QmeRNyXC5KQLQVgZMVQfv6YBCQfSG2MbZSHAcdjCzN9eG9/0.jpg"
-          alt="test"
-        />
+        {displayData && (
+          <img className={styles.image} src={displayData.image} alt="test" />
+        )}
       </div>
-      <h1 className={styles.name}>Equilibrium #3429</h1>
-      <p className={styles.desc}>
-        Our Equilibrium collection promotes balance and calm
-      </p>
+      {displayData && <h1 className={styles.name}>{displayData.name}</h1>}
+      {displayData && <p className={styles.desc}>{displayData.description}</p>}
       <Button
         toggleModal={toggleModal}
         address={address}
